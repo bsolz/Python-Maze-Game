@@ -14,10 +14,10 @@ A Python based game in which a user is given a randomly generated maze. The user
 
 You will need to have the terminal open along with the main game window. For every move you want to make, you must input either W, A, S or D and press enter per move
 
-**W** - Move Up\n
-**S** - Move Down\n
-**A** - Move Left\n
-**D** - Move Right\n
+**W** - Move Up <br />
+**S** - Move Down <br />
+**A** - Move Left <br />
+**D** - Move Right <br />
 
 Once you think you have a valid sequence of moves, input in 'e' and press enter
 
@@ -32,13 +32,13 @@ If the sequence was not, you can try again with a -2 deduction on your total sco
 
 ## How Was It Built?
 
-**maze.cpp/maze.h/main.cpp**\n
+#### maze.cpp/maze.h/main.cpp
 This project was actually inspired by an assignment I had to do in my Data Structures & Algorithms class where I had to generate random mazes. I then modified the code to generate 500 random mazes of the same size, which represent the different levels the maze can choose from. These mazes are output as text files of size 3x3, where each coordinate is an integer that represents a certain wall configuration.
 
 ### Wall configurations
 <img src="/walls.png" alt="Walls" width="200"/>
 
-**mazegame.py**\n
+#### mazegame.py
 I then transformed the wall configurations into a 9x9 grid, and made the game more interractive by adding a visual interface using the turtle module, and added the games rules into the implementation
 
 ## How Do You Run?
