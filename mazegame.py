@@ -98,8 +98,6 @@ CellArt = {
         ["XXX"]],
 }
 
-# Declare empty arrays
-
 
 ### MAIN COMMANDS ###
 ### MAIN COMMANDS ###
@@ -110,7 +108,7 @@ CellArt = {
 ### MAIN COMMANDS ###
 
 
-#Read in text and properly parse it to level empty level array
+# Delcaring Variables and the initial prompt
 TrueCounter = 0
 StartTime = time.time()
 TimeLimit = 30
@@ -120,8 +118,12 @@ Prompt = "\nYour goal is to put in a Use WASD to make inputs. Press enter after 
 
 print(Prompt)
 
+# Main While Loop for the game
+# Set max mazes to be solved in 30 seconds, 10 mazes
 while TrueCounter != 10:
+
     print("Score: " + str(score))
+    #Create an empty list of strings for each row of the maze
     level = [
         "",
         "",
@@ -142,17 +144,20 @@ while TrueCounter != 10:
     Finishline = []
     FileName = random.choice(os.listdir("Levels"))
     FileName = "./Levels/" + FileName
+
+    # Choose random level and put them in a 1d list
     with open(FileName) as f:
         for line in f:
             TextFileInts.append([int(x) for x in line.split()])
 
+    # Correspond each int in the 1d list to its matching 3x3 configuration and append blocks to create a list of 3 element lists
     for x in range(3):
         for y in range(3):
             Blocks.append(CellArt[TextFileInts[x][y]])
 
     CorrespondingRows = [[],[],[]]
 
-
+    # Parse list properly to make the level
     for i in range(9):
         CorrespondingRows[0].extend(Blocks[i][0])
         CorrespondingRows[1].extend(Blocks[i][1])
@@ -180,6 +185,7 @@ while TrueCounter != 10:
     setup_maze(level)
 
     Solved = False
+    # A while loop that breaks if the correct sequence is given
     while Solved == False:
         # Takes in input and stores it in an array
         NewInput = ''
@@ -206,36 +212,41 @@ while TrueCounter != 10:
         player.goto(FinalX, FinalY)
 
         # Checks if final coordinates is in the finished position
-        
         for x in range(len(Finishline)):
             if ( Finishline[x] == ((FinalX), (FinalY))):
                 Solved = True
-                score += 15
-                TrueCounter += 1
-
+                if((time.time() - StartTime) < TimeLimit):
+                    score += 15
+                    TrueCounter += 1
+        # If statements to check if input was given in time
         if((time.time() - StartTime) > TimeLimit):
             falseinput = True
             print("Time is up. Your score is: " + str(score))
             break
 
         if Solved == False:
-            score -= 2
+            if((time.time() - StartTime) < TimeLimit):
+                score -= 2
             print("Score: " + str(score))
             player.goto(-84,108)
 
         print(Solved)
+
 
     if(falseinput == True):
         break
     if(time.time() - StartTime > TimeLimit):
         print("Time is up. Your score is: " + str(score))
         break
+
+    # Resets maze for new generation
     player.goto(-84,108)
     pen.reset()
 
 if(TrueCounter == 10):
     print("You did it! You're final score is: " + str(score))
 
+# Exit prompt
 Exit = input("Press Q to exit window: ")
 
 if(Exit == "Q"):

@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
     unsigned int iteration = 0;
 
-    //Creates the 20 unique "maps" per level
+    //Creates the 500 unique "maps" per level
     for(int i = 499; i >= 0; i--){
     std::srand(seed);
     std::string OutputFile = argv[4] + std::to_string(iteration);
